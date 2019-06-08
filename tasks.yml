@@ -1,0 +1,22 @@
+gh_repo:        git@github.com:mnmohanc/HelloWorld.git
+dest_dir:       /opt/test
+dest_dir_owner: vagrant
+dest_dir_group: vagrant
+dest_dir_perm:  0755
+
+
+- name:             cloning repo
+  git:
+    repo:           "{{ gh_repo }}"
+    version:        "{{ gh_branch | default('master') }}"
+    dest:           "{{ dest_dir }}"
+    key_file:       /root/.ssh/id_rsa
+    accept_hostkey: yes
+    force:          yes
+
+- name:             check out a git repository
+  local_action:
+    module:         git
+    repo:           "{{ gh_repo }}"
+    dest:           /tmp/test1
+    key_file:       /Users/{{id }}/.ssh/id_rsa
